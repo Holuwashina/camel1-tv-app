@@ -27,3 +27,4 @@ node_modules/
 API-NOTES.md
 build-*.log
 CLAUDE.local.md
+dist/*.md
