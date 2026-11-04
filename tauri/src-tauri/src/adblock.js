@@ -120,6 +120,28 @@
   };
   quietGuide();
 
+  // 7b. When a live stream starves, the page's player stalls and then rewinds
+  // to the start of what it still holds, replaying a minute or more. Instead,
+  // move to just behind the end of the buffer. Only seeks that follow a stall
+  // are touched, and only when they land far behind the buffered end.
+  const guardLive = () => {
+    const v = document.querySelector('#room_video_match video');
+    if (!v || v.dataset.ninetyGuard) return;
+    v.dataset.ninetyGuard = '1';
+    let stalledAt = 0, ours = false;
+    v.addEventListener('waiting', () => { stalledAt = Date.now(); });
+    v.addEventListener('seeking', () => {
+      if (ours) { ours = false; return; }
+      if (Date.now() - stalledAt > 15000) return;
+      const b = v.buffered;
+      if (!b.length) return;
+      const end = b.end(b.length - 1);
+      if (end - v.currentTime < 20) return;
+      ours = true;
+      v.currentTime = Math.max(b.start(b.length - 1), end - 8);
+    });
+  };
+
   // 7. Dismiss the page's own interstitial once its countdown ends.
   const closeHouseAds = () => {
     for (const b of document.querySelectorAll('button[aria-label="Close ad"]')) {
@@ -148,9 +170,9 @@
     new MutationObserver(() => {
       if (queued) return;
       queued = true;
-      setTimeout(() => { queued = false; sweep(document); if (settled) { mountSwitcher(); mountBack(); } quietGuide(); closeHouseAds(); }, 250);
+      setTimeout(() => { queued = false; sweep(document); if (settled) { mountSwitcher(); mountBack(); } quietGuide(); closeHouseAds(); guardLive(); }, 250);
     }).observe(document.documentElement, { childList: true, subtree: true });
-    document.addEventListener('DOMContentLoaded', () => { sweep(document); quietGuide(); closeHouseAds(); });
+    document.addEventListener('DOMContentLoaded', () => { sweep(document); quietGuide(); closeHouseAds(); guardLive(); });
     // Our own elements go in only once the page has finished taking over its
     // server-rendered markup; inserting them earlier makes it rebuild the page.
     let settled = false;
