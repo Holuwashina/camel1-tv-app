@@ -91,6 +91,30 @@
     host.appendChild(box);
     applyTheme(currentTheme());
   };
+  // A way back from a match page. The page's own breadcrumb is hidden.
+  const mountBack = () => {
+    const host = document.querySelector('.header-content');
+    if (!host) return;
+    const onMatch = location.pathname !== '/';
+    const old = host.querySelector('.ninety-back');
+    if (!onMatch) { if (old) old.remove(); return; }
+    if (old) return;
+    const a = document.createElement('a');
+    a.className = 'ninety-back'; a.href = '/'; a.textContent = 'Matches';
+    a.setAttribute('aria-label', 'Back to matches');
+    const logo = host.querySelector('.header-logo');
+    if (logo) logo.after(a); else host.prepend(a);
+  };
+
+  // 7a. The page's first-visit guide is a full-window modal whose backdrop
+  // swallows every click (play, header). It only opens when this cookie is
+  // missing, so keep the cookie set; if it opens anyway, use its own close.
+  const quietGuide = () => {
+    try { document.cookie = 'showRoomGuide=1; path=/; max-age=31536000; SameSite=Lax'; } catch (e) {}
+    const close = document.querySelector('.MuiModal-root .roomGuide-close');
+    if (close) close.click();
+  };
+  quietGuide();
 
   // 7. Dismiss the page's own interstitial once its countdown ends.
   const closeHouseAds = () => {
@@ -117,9 +141,9 @@
     new MutationObserver(() => {
       if (queued) return;
       queued = true;
-      setTimeout(() => { queued = false; sweep(document); mountSwitcher(); closeHouseAds(); }, 250);
+      setTimeout(() => { queued = false; sweep(document); mountSwitcher(); mountBack(); quietGuide(); closeHouseAds(); }, 250);
     }).observe(document.documentElement, { childList: true, subtree: true });
-    document.addEventListener('DOMContentLoaded', () => { sweep(document); mountSwitcher(); closeHouseAds(); });
+    document.addEventListener('DOMContentLoaded', () => { sweep(document); mountSwitcher(); mountBack(); quietGuide(); closeHouseAds(); });
   };
 
   if (document.head) {

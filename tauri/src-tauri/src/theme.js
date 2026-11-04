@@ -63,6 +63,8 @@ a:hover{color:var(--accent-text)!important}
 .header-logo::after{content:"Ninety";font:600 17px/1 Inter,system-ui,sans-serif;letter-spacing:-0.01em;color:var(--text)}
 
 /* theme switcher (mounted by adblock.js) */
+.grouped-match-item a.team-name,.grouped-match-item a.team-logo{pointer-events:none}
+.ninety-back{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 10px;margin-left:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)!important;font:500 13px/1 Inter,system-ui,sans-serif;text-decoration:none!important;white-space:nowrap}.ninety-back::before{content:"←";font-size:14px;color:var(--muted)}.ninety-back:hover{border-color:var(--accent)}
 .ninety-theme{display:inline-flex;gap:6px;align-items:center;margin-left:auto;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
 .ninety-theme button{width:28px;height:28px;border:0;border-radius:6px;background:transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
 .ninety-theme button span{width:14px;height:14px;border-radius:50%;border:1px solid var(--line);display:block}

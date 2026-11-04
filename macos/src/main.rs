@@ -28,6 +28,7 @@ fn main() -> wry::Result<()> {
 
     let _webview = WebViewBuilder::new()
         .with_url(URL)
+        .with_back_forward_navigation_gestures(true)
         .with_initialization_script(concat!(include_str!("theme.js"), "\n", include_str!("adblock.js")))
         .with_new_window_req_handler(|url| {
             // Pop-ups are dropped unless they go to the site's own social links.
