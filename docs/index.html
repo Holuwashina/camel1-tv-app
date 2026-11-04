@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camel1 TV app downloads</title>
+<meta name="description" content="Unofficial desktop and Android apps for camel1.tv. Download for Mac, Windows, Linux and Android.">
+<style>
+  :root {
+    --bg: #0f1210; --card: #181d19; --text: #e8ece9; --muted: #9aa49c;
+    --accent: #5fd36b; --accent-ink: #0b1a0d; --line: #262d28;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: 2rem; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin: 0 0 32px; }
+  .notice { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; color: var(--muted); font-size: .95rem; margin-bottom: 32px; }
+  .grid { display: grid; gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .card.primary { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+  .card .info { flex: 1 1 200px; }
+  .card h2 { font-size: 1.1rem; margin: 0 0 2px; }
+  .card p { margin: 0; color: var(--muted); font-size: .92rem; }
+  .btn { display: inline-block; background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap; }
+  .btn.disabled { background: var(--line); color: var(--muted); pointer-events: none; }
+  .tag { font-size: .8rem; color: var(--accent); margin-left: 6px; }
+  details { margin-top: 10px; color: var(--muted); font-size: .92rem; }
+  summary { cursor: pointer; color: var(--text); }
+  footer { margin-top: 40px; color: var(--muted); font-size: .85rem; }
+  footer a, .info a { color: var(--accent); }
+  code { background: #0b0e0c; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Camel1 TV app</h1>
+  <p class="sub">Watch <a href="https://www.camel1.tv/" style="color:var(--accent)">camel1.tv</a> in its own window, with the promo banners hidden and pop-ups blocked.</p>
+
+  <div class="notice">
+    This is an unofficial, community-made app. It is not made by or affiliated with Camel1.
+    It simply shows the camel1.tv website. Source code is on
+    <a href="https://github.com/Holuwashina/camel1-tv-app" style="color:var(--accent)">GitHub</a>.
+  </div>
+
+  <div class="grid" id="downloads">
+    <div class="card" data-os="mac">
+      <div class="info">
+        <h2>Mac <span class="tag" hidden>Your device</span></h2>
+        <p>Intel and Apple Silicon. Open the .dmg and drag to Applications.</p>
+        <details><summary>macOS says the developer can't be verified</summary>
+          Right-click the app, choose Open, then Open again. On newer macOS you may also need
+          System Settings, Privacy &amp; Security, then "Open Anyway". This is a one-time step.
+        </details>
+      </div>
+      <a class="btn" data-asset="Camel1-TV-macOS.dmg" href="#">Download .dmg</a>
+    </div>
+
+    <div class="card" data-os="android">
+      <div class="info">
+        <h2>Android <span class="tag" hidden>Your device</span></h2>
+        <p>Android 7 and newer. Open the .apk after downloading.</p>
+        <details><summary>Phone blocks the install</summary>
+          Android asks you to allow installs from this source (your browser) the first time.
+          Allow it, then open the file again.
+        </details>
+      </div>
+      <a class="btn" data-asset="Camel1-TV-Android.apk" href="#">Download .apk</a>
+    </div>
+
+    <div class="card" data-os="windows">
+      <div class="info">
+        <h2>Windows <span class="tag" hidden>Your device</span></h2>
+        <p>Windows 10 and 11, 64-bit installer.</p>
+        <details><summary>Windows SmartScreen warning</summary>
+          Click "More info", then "Run anyway". The app isn't code-signed, which is why Windows asks.
+        </details>
+      </div>
+      <a class="btn" data-asset="Camel1-TV-Windows-Setup.exe" href="#">Download installer</a>
+    </div>
+
+    <div class="card" data-os="linux">
+      <div class="info">
+        <h2>Linux <span class="tag" hidden>Your device</span></h2>
+        <p>AppImage runs anywhere (<code>chmod +x</code> it first). A .deb is also available.</p>
+      </div>
+      <a class="btn" data-asset="Camel1-TV-Linux.AppImage" href="#">AppImage</a>
+      <a class="btn" data-asset="Camel1-TV-Linux.deb" href="#">.deb</a>
+    </div>
+
+    <div class="card" data-os="ios">
+      <div class="info">
+        <h2>iPhone and iPad <span class="tag" hidden>Your device</span></h2>
+        <p>Apple doesn't allow apps to be installed from a web page. Use the website instead:
+           open camel1.tv in Safari, tap Share, then "Add to Home Screen".</p>
+      </div>
+      <a class="btn" href="https://www.camel1.tv/">Open camel1.tv</a>
+    </div>
+  </div>
+
+  <footer>
+    <span id="version"></span>
+    All downloads come from the project's
+    <a href="https://github.com/Holuwashina/camel1-tv-app/releases">GitHub Releases</a> page.
+  </footer>
+</main>
+
+<script>
+(() => {
+  const repo = 'Holuwashina/camel1-tv-app';
+  const base = `https://github.com/${repo}/releases/latest/download/`;
+
+  // Point every button at the stable asset name on the latest release.
+  document.querySelectorAll('[data-asset]').forEach(a => { a.href = base + a.dataset.asset; });
+
+  // Highlight the visitor's platform and move it to the top.
+  const ua = navigator.userAgent;
+  const os = /iPhone|iPad|iPod/.test(ua) ? 'ios'
+    : /Android/.test(ua) ? 'android'
+    : /Mac/.test(ua) ? 'mac'
+    : /Win/.test(ua) ? 'windows'
+    : /Linux/.test(ua) ? 'linux' : null;
+  if (os) {
+    const card = document.querySelector(`.card[data-os="${os}"]`);
+    if (card) {
+      card.classList.add('primary');
+      card.querySelector('.tag').hidden = false;
+      card.parentNode.prepend(card);
+    }
+  }
+
+  // Grey out any download that isn't on the latest release yet.
+  fetch(`https://api.github.com/repos/${repo}/releases/latest`)
+    .then(r => r.ok ? r.json() : null)
+    .then(rel => {
+      if (!rel) return;
+      const have = new Set(rel.assets.map(a => a.name));
+      document.querySelectorAll('[data-asset]').forEach(a => {
+        if (!have.has(a.dataset.asset)) {
+          a.classList.add('disabled');
+          a.textContent = 'Coming soon';
+        }
+      });
+      document.getElementById('version').textContent = `Latest: ${rel.tag_name}. `;
+    })
+    .catch(() => {});
+})();
+</script>
+</body>
+</html>

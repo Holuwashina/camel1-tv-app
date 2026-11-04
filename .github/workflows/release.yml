@@ -1,0 +1,82 @@
+# Builds the Windows and Linux installers from camel1-mobile (the Tauri project)
+# and attaches them to the GitHub Release for the pushed tag.
+#
+# Mac (.dmg) and Android (.apk) are built locally and uploaded by hand, because
+# the Mac app is the separate `camel1` project and the Android signing key is
+# kept off GitHub. Asset names are fixed so the download page can link to
+# .../releases/latest/download/<name>.
+name: Release installers
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing release tag to attach builds to (e.g. v0.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            name: windows
+          - os: ubuntu-22.04
+            name: linux
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: camel1-mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: camel1-mobile/src-tauri
+
+      - name: Linux build dependencies
+        if: matrix.name == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev \
+            librsvg2-dev patchelf build-essential libssl-dev libgtk-3-dev
+
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2" --locked
+
+      - name: Build
+        run: cargo tauri build
+
+      - name: Collect installers (Windows)
+        if: matrix.name == 'windows'
+        shell: bash
+        run: |
+          mkdir -p out
+          cp src-tauri/target/release/bundle/nsis/*-setup.exe out/Camel1-TV-Windows-Setup.exe
+          ls -la out
+
+      - name: Collect installers (Linux)
+        if: matrix.name == 'linux'
+        run: |
+          mkdir -p out
+          cp src-tauri/target/release/bundle/appimage/*.AppImage out/Camel1-TV-Linux.AppImage
+          cp src-tauri/target/release/bundle/deb/*.deb out/Camel1-TV-Linux.deb
+          ls -la out
+
+      - name: Upload to release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.inputs.tag || github.ref_name }}
+        run: |
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
+            || gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title "Camel1 TV $TAG" --notes "Automated build."
+          gh release upload "$TAG" out/* --repo "$GITHUB_REPOSITORY" --clobber
