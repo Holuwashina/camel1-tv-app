@@ -148,9 +148,14 @@
     new MutationObserver(() => {
       if (queued) return;
       queued = true;
-      setTimeout(() => { queued = false; sweep(document); mountSwitcher(); mountBack(); quietGuide(); closeHouseAds(); }, 250);
+      setTimeout(() => { queued = false; sweep(document); if (settled) { mountSwitcher(); mountBack(); } quietGuide(); closeHouseAds(); }, 250);
     }).observe(document.documentElement, { childList: true, subtree: true });
-    document.addEventListener('DOMContentLoaded', () => { sweep(document); mountSwitcher(); mountBack(); quietGuide(); closeHouseAds(); });
+    document.addEventListener('DOMContentLoaded', () => { sweep(document); quietGuide(); closeHouseAds(); });
+    // Our own elements go in only once the page has finished taking over its
+    // server-rendered markup; inserting them earlier makes it rebuild the page.
+    let settled = false;
+    const settle = () => { settled = true; mountSwitcher(); mountBack(); };
+    if (document.readyState === 'complete') setTimeout(settle, 0); else window.addEventListener('load', () => setTimeout(settle, 0));
   };
 
   if (document.head) {
