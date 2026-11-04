@@ -1,17 +1,17 @@
 <div align="center">
 
-<img src="docs/icon.png" width="96" height="96" alt="Camel1 TV app icon">
+<img src="docs/icon.png" width="96" height="96" alt="Ninety app icon">
 
-# Camel1 TV
+# Ninety
 
-**Live football from camel1.tv in its own app. No browser tabs, no promo banners, no pop-ups.**
+**Live football in its own app. Calm, focused, yours. Dark, Light or Daybreak.**
 
-[![Latest release](https://img.shields.io/github/v/release/Holuwashina/camel1-tv-app?label=version&color=5fd36b)](https://github.com/Holuwashina/camel1-tv-app/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/Holuwashina/camel1-tv-app/total?color=5fd36b)](https://github.com/Holuwashina/camel1-tv-app/releases)
-[![Build](https://img.shields.io/github/actions/workflow/status/Holuwashina/camel1-tv-app/release.yml?label=build)](https://github.com/Holuwashina/camel1-tv-app/actions)
+[![Latest release](https://img.shields.io/github/v/release/Holuwashina/ninety?label=version&color=5fd36b)](https://github.com/Holuwashina/ninety/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/Holuwashina/ninety/total?color=5fd36b)](https://github.com/Holuwashina/ninety/releases)
+[![Build](https://img.shields.io/github/actions/workflow/status/Holuwashina/ninety/release.yml?label=build)](https://github.com/Holuwashina/ninety/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-5fd36b)](LICENSE)
 
-### [⬇ &nbsp;Download for your device](https://holuwashina.github.io/camel1-tv-app/)
+### [⬇ &nbsp;Download for your device](https://holuwashina.github.io/ninety/)
 
 </div>
 
@@ -21,20 +21,19 @@
 
 | Platform | Download | Requirements |
 |:--|:--|:--|
-| **macOS** | [Camel1-TV-macOS.dmg](https://github.com/Holuwashina/camel1-tv-app/releases/latest/download/Camel1-TV-macOS.dmg) | macOS 11 or later · Intel and Apple Silicon |
-| **Android** | [Camel1-TV-Android.apk](https://github.com/Holuwashina/camel1-tv-app/releases/latest/download/Camel1-TV-Android.apk) | Android 7.0 or later |
-| **Windows** | [Camel1-TV-Windows-Setup.exe](https://github.com/Holuwashina/camel1-tv-app/releases/latest/download/Camel1-TV-Windows-Setup.exe) | Windows 10 or 11 · 64-bit |
-| **Linux** | [AppImage](https://github.com/Holuwashina/camel1-tv-app/releases/latest/download/Camel1-TV-Linux.AppImage) · [.deb](https://github.com/Holuwashina/camel1-tv-app/releases/latest/download/Camel1-TV-Linux.deb) | x86_64 |
-| **iPhone / iPad** | Open [camel1.tv](https://www.camel1.tv/) in Safari, then Share → *Add to Home Screen* | Apple does not allow installs from the web |
+| **macOS** | [Ninety-macOS.dmg](https://github.com/Holuwashina/ninety/releases/latest/download/Ninety-macOS.dmg) | macOS 11 or later · Intel and Apple Silicon |
+| **Android** | [Ninety-Android.apk](https://github.com/Holuwashina/ninety/releases/latest/download/Ninety-Android.apk) | Android 7.0 or later |
+| **Windows** | [Ninety-Windows-Setup.exe](https://github.com/Holuwashina/ninety/releases/latest/download/Ninety-Windows-Setup.exe) | Windows 10 or 11 · 64-bit |
+| **Linux** | [AppImage](https://github.com/Holuwashina/ninety/releases/latest/download/Ninety-Linux.AppImage) · [.deb](https://github.com/Holuwashina/ninety/releases/latest/download/Ninety-Linux.deb) | x86_64 |
+| **iPhone / iPad** | Not available yet. | |
 
-All files come from the [Releases](https://github.com/Holuwashina/camel1-tv-app/releases) page. Install steps for each platform, including the first-launch security prompts, are on the [download page](https://holuwashina.github.io/camel1-tv-app/).
+All files come from the [Releases](https://github.com/Holuwashina/ninety/releases) page. Install steps for each platform, including the first-launch security prompts, are on the [download page](https://holuwashina.github.io/ninety/).
 
 ## What it does
 
-- Opens camel1.tv in a native window using the web engine already on your device, so the app is a few megabytes.
-- Hides the rotating promo banners on the home page.
-- Blocks pop-up windows and known ad redirects.
-- Keeps the site's own links working; social links open in your browser.
+- A native window using the web engine already on your device, so the app is a few megabytes.
+- Shows the schedule and the match in Ninety's own look: one accent, clean type, three themes (Dark, Light, Daybreak) that follow your system or your pick.
+- Stays on the site; social links open in your browser.
 
 ## Building from source
 
@@ -42,8 +41,8 @@ See [BUILDING.md](BUILDING.md).
 
 ## License
 
-[MIT](LICENSE). The app code is open source; camel1.tv and its content belong to their respective owners.
+[MIT](LICENSE) for the app code. Content belongs to its respective owners.
 
 ---
 
-<sub>Unofficial, community-made app. Not made by or affiliated with Camel1 or camel1.tv. It displays the public camel1.tv website and hosts no content of its own.</sub>
+<sub>Ninety is an independent, community-made app. Matches and streams are provided by camel1.tv, which is not affiliated with this project.</sub>

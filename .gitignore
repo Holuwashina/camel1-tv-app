@@ -1,10 +1,10 @@
 # Build output
 target/
-camel1-mobile/src-tauri/gen/android/app/build/
-camel1-mobile/src-tauri/gen/android/.gradle/
-camel1-mobile/src-tauri/gen/android/local.properties
-camel1-mobile/src-tauri/gen/android/app/src/main/jniLibs/
-camel1-mobile/src-tauri/gen/schemas/
+tauri/src-tauri/gen/android/app/build/
+tauri/src-tauri/gen/android/.gradle/
+tauri/src-tauri/gen/android/local.properties
+tauri/src-tauri/gen/android/app/src/main/jniLibs/
+tauri/src-tauri/gen/schemas/
 
 # Signing secrets (keystore lives in ~/.android, password file must not be committed)
 keystore.properties
@@ -22,3 +22,8 @@ keystore.properties
 .idea/
 *.iml
 node_modules/
+
+# private reverse-engineering notes
+API-NOTES.md
+build-*.log
+CLAUDE.local.md

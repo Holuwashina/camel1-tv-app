@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Ninety mark">
+  <!-- Master mark, 1000-unit art space. Stroke 90, round caps. Bounds x 88..913, y 200..800. -->
+  <g fill="none" stroke="#06240B" stroke-width="80" stroke-linecap="round">
+    <circle cx="230" cy="370" r="130"/>
+    <line x1="360" y1="370" x2="360" y2="760"/>
+    <ellipse cx="630" cy="500" rx="130" ry="240"/>
+    <line x1="900" y1="240" x2="900" y2="330"/>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+[package]
+name = "ninety"
+version = "0.3.0"
+edition = "2021"
+
+[dependencies]
+tao = "0.30"
+wry = "0.47"
+
+[profile.release]
+opt-level = "s"
+lto = true
+strip = true

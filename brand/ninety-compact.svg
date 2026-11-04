@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Ninety compact mark">
+  <!-- Compact mark for 32 px and below (favicon, status bar, tab): the zero and the minute tick only. -->
+  <g fill="none" stroke="#5FD36B" stroke-width="110" stroke-linecap="round">
+    <ellipse cx="440" cy="500" rx="170" ry="280"/>
+    <line x1="720" y1="230" x2="720" y2="340"/>
+  </g>
+</svg>

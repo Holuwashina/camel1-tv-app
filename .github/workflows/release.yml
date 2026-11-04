@@ -1,8 +1,8 @@
-# Builds the Windows and Linux installers from camel1-mobile (the Tauri project)
+# Builds the Windows and Linux installers from tauri/ (the Tauri project)
 # and attaches them to the GitHub Release for the pushed tag.
 #
 # Mac (.dmg) and Android (.apk) are built locally and uploaded by hand, because
-# the Mac app is the separate `camel1` project and the Android signing key is
+# the Mac app is the separate `macos` project and the Android signing key is
 # kept off GitHub. Asset names are fixed so the download page can link to
 # .../releases/latest/download/<name>.
 name: Release installers
@@ -32,7 +32,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        working-directory: camel1-mobile
+        working-directory: tauri
     steps:
       - uses: actions/checkout@v4
 
@@ -40,7 +40,7 @@ jobs:
 
       - uses: Swatinem/rust-cache@v2
         with:
-          workspaces: camel1-mobile/src-tauri
+          workspaces: tauri/src-tauri
 
       - name: Linux build dependencies
         if: matrix.name == 'linux'
@@ -60,15 +60,15 @@ jobs:
         shell: bash
         run: |
           mkdir -p out
-          cp src-tauri/target/release/bundle/nsis/*-setup.exe out/Camel1-TV-Windows-Setup.exe
+          cp src-tauri/target/release/bundle/nsis/*-setup.exe out/Ninety-Windows-Setup.exe
           ls -la out
 
       - name: Collect installers (Linux)
         if: matrix.name == 'linux'
         run: |
           mkdir -p out
-          cp src-tauri/target/release/bundle/appimage/*.AppImage out/Camel1-TV-Linux.AppImage
-          cp src-tauri/target/release/bundle/deb/*.deb out/Camel1-TV-Linux.deb
+          cp src-tauri/target/release/bundle/appimage/*.AppImage out/Ninety-Linux.AppImage
+          cp src-tauri/target/release/bundle/deb/*.deb out/Ninety-Linux.deb
           ls -la out
 
       - name: Upload to release
@@ -78,5 +78,5 @@ jobs:
           TAG: ${{ github.event.inputs.tag || github.ref_name }}
         run: |
           gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
-            || gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title "Camel1 TV $TAG" --notes "Automated build."
+            || gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --title "Ninety $TAG" --notes "Automated build."
           gh release upload "$TAG" out/* --repo "$GITHUB_REPOSITORY" --clobber
