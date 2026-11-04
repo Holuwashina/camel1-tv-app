@@ -3,145 +3,221 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Camel1 TV app downloads</title>
-<meta name="description" content="Unofficial desktop and Android apps for camel1.tv. Download for Mac, Windows, Linux and Android.">
+<title>Camel1 TV app</title>
+<meta name="description" content="Camel1 TV desktop and Android apps. Download for Mac, Windows, Linux and Android.">
+<link rel="icon" href="icon.png">
+<meta property="og:title" content="Camel1 TV app">
+<meta property="og:description" content="Watch camel1.tv in its own app. Mac, Windows, Linux and Android.">
+<meta property="og:image" content="https://holuwashina.github.io/camel1-tv-app/icon.png">
 <style>
   :root {
-    --bg: #0f1210; --card: #181d19; --text: #e8ece9; --muted: #9aa49c;
-    --accent: #5fd36b; --accent-ink: #0b1a0d; --line: #262d28;
+    --bg: #0c0f0d; --bg-2: #11161300; --card: #151a17; --card-hover: #191f1b;
+    --text: #eef2ef; --muted: #98a39b; --line: #232a26;
+    --accent: #5fd36b; --accent-dark: #3fae4c; --accent-ink: #07150a;
+    --radius: 14px;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 64px; }
-  h1 { font-size: 2rem; margin: 0 0 8px; }
-  .sub { color: var(--muted); margin: 0 0 32px; }
-  .notice { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; color: var(--muted); font-size: .95rem; margin-bottom: 32px; }
-  .grid { display: grid; gap: 14px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  .card.primary { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
-  .card .info { flex: 1 1 200px; }
-  .card h2 { font-size: 1.1rem; margin: 0 0 2px; }
-  .card p { margin: 0; color: var(--muted); font-size: .92rem; }
-  .btn { display: inline-block; background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    background-image: radial-gradient(900px 400px at 50% -100px, rgba(95,211,107,.14), transparent 70%);
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+
+  header { padding: 64px 0 36px; text-align: center; }
+  .logo { width: 84px; height: 84px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.06); }
+  h1 { font-size: clamp(2rem, 5vw, 2.75rem); letter-spacing: -.02em; margin: 20px 0 8px; }
+  .lede { color: var(--muted); font-size: 1.1rem; max-width: 560px; margin: 0 auto 26px; }
+  .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none; padding: 14px 24px; border-radius: 12px; font-size: 1.05rem; transition: transform .12s, background .12s; }
+  .cta:hover { background: #76e081; transform: translateY(-1px); }
+  .cta svg { width: 22px; height: 22px; }
+  .cta-sub { color: var(--muted); font-size: .9rem; margin-top: 10px; }
+  .cta-sub a { color: var(--muted); }
+
+  .unofficial { margin: 10px auto 0; max-width: 620px; color: var(--muted); font-size: .9rem; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.02); }
+
+  h2.section { font-size: 1rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 44px 0 14px; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 14px; transition: background .12s, border-color .12s; position: relative; }
+  .card:hover { background: var(--card-hover); }
+  .card.primary { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset, 0 12px 30px -16px rgba(95,211,107,.5); order: -1; }
+  .card .head { display: flex; align-items: center; gap: 14px; }
+  .icon { width: 44px; height: 44px; border-radius: 12px; background: #0b0e0c; border: 1px solid var(--line); display: grid; place-items: center; flex: none; }
+  .icon svg { width: 24px; height: 24px; fill: var(--text); }
+  .card h3 { margin: 0; font-size: 1.15rem; }
+  .meta { color: var(--muted); font-size: .88rem; }
+  .you { display: none; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent); padding: 3px 8px; border-radius: 999px; position: absolute; top: 14px; right: 14px; }
+  .card.primary .you { display: inline-block; }
+  .card p { margin: 0; color: var(--muted); font-size: .95rem; flex: 1; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--accent-ink); font-weight: 650; text-decoration: none; padding: 10px 16px; border-radius: 10px; font-size: .95rem; transition: background .12s; }
+  .btn:hover { background: #76e081; }
+  .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  .btn.secondary:hover { background: rgba(255,255,255,.04); }
   .btn.disabled { background: var(--line); color: var(--muted); pointer-events: none; }
-  .tag { font-size: .8rem; color: var(--accent); margin-left: 6px; }
-  details { margin-top: 10px; color: var(--muted); font-size: .92rem; }
-  summary { cursor: pointer; color: var(--text); }
-  footer { margin-top: 40px; color: var(--muted); font-size: .85rem; }
-  footer a, .info a { color: var(--accent); }
-  code { background: #0b0e0c; padding: 1px 5px; border-radius: 4px; }
+  .btn .size { font-weight: 400; opacity: .75; font-size: .85em; }
+  details { font-size: .9rem; color: var(--muted); }
+  summary { cursor: pointer; color: var(--text); list-style: none; display: flex; align-items: center; gap: 6px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: rotate(-45deg); transition: transform .12s; }
+  details[open] summary::before { transform: rotate(45deg); }
+  details ol { margin: 8px 0 0; padding-left: 20px; }
+  code { background: #0b0e0c; border: 1px solid var(--line); padding: 1px 6px; border-radius: 5px; font-size: .9em; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .feature { padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,255,255,.015); }
+  .feature strong { display: block; margin-bottom: 4px; }
+  .feature span { color: var(--muted); font-size: .93rem; }
+
+  footer { margin: 56px 0 48px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  footer a { color: var(--muted); }
+  @media (max-width: 480px) { header { padding-top: 44px; } .card { padding: 18px; } }
 </style>
 </head>
 <body>
-<main>
-  <h1>Camel1 TV app</h1>
-  <p class="sub">Watch <a href="https://www.camel1.tv/" style="color:var(--accent)">camel1.tv</a> in its own window, with the promo banners hidden and pop-ups blocked.</p>
+<div class="wrap">
 
-  <div class="notice">
-    This is an unofficial, community-made app. It is not made by or affiliated with Camel1.
-    It simply shows the camel1.tv website. Source code is on
-    <a href="https://github.com/Holuwashina/camel1-tv-app" style="color:var(--accent)">GitHub</a>.
-  </div>
+  <header>
+    <img class="logo" src="icon.png" alt="" width="84" height="84">
+    <h1>Camel1 TV</h1>
+    <p class="lede">Live football from camel1.tv in its own app. No browser tabs, no promo banners, no pop-ups.</p>
+    <a class="cta" id="cta" href="#downloads">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1 1 0 0 1 1 1v9.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V4a1 1 0 0 1 1-1zM5 18a1 1 0 0 1 1 1v1h12v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/></svg>
+      <span id="cta-text">Download</span>
+    </a>
+    <div class="cta-sub" id="version">Free and open source.</div>
+    <p class="unofficial">Unofficial, community-made app. Not affiliated with Camel1. It shows the camel1.tv website in a native window.</p>
+  </header>
 
-  <div class="grid" id="downloads">
+  <h2 class="section" id="downloads">Download</h2>
+  <div class="grid" id="grid">
+
     <div class="card" data-os="mac">
-      <div class="info">
-        <h2>Mac <span class="tag" hidden>Your device</span></h2>
-        <p>Intel and Apple Silicon. Open the .dmg and drag to Applications.</p>
-        <details><summary>macOS says the developer can't be verified</summary>
-          Right-click the app, choose Open, then Open again. On newer macOS you may also need
-          System Settings, Privacy &amp; Security, then "Open Anyway". This is a one-time step.
-        </details>
+      <span class="you">Your device</span>
+      <div class="head">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg></div>
+        <div><h3>Mac</h3><div class="meta">macOS 11+, Intel and Apple Silicon</div></div>
       </div>
-      <a class="btn" data-asset="Camel1-TV-macOS.dmg" href="#">Download .dmg</a>
+      <p>One universal app. Open the disk image and drag Camel1 TV to Applications.</p>
+      <div class="actions"><a class="btn" data-asset="Camel1-TV-macOS.dmg" href="#">Download .dmg <span class="size"></span></a></div>
+      <details><summary>"Developer cannot be verified"</summary>
+        <ol><li>Right-click the app and choose Open.</li><li>Click Open in the dialog.</li><li>On newer macOS, go to System Settings, Privacy &amp; Security, and click Open Anyway.</li></ol>
+        This happens once. The app isn't notarized with Apple yet.</details>
     </div>
 
     <div class="card" data-os="android">
-      <div class="info">
-        <h2>Android <span class="tag" hidden>Your device</span></h2>
-        <p>Android 7 and newer. Open the .apk after downloading.</p>
-        <details><summary>Phone blocks the install</summary>
-          Android asks you to allow installs from this source (your browser) the first time.
-          Allow it, then open the file again.
-        </details>
+      <span class="you">Your device</span>
+      <div class="head">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.14-.52.38.38 0 0 0-.52.14l-1.86 3.22A11.4 11.4 0 0 0 12 8.1c-1.78 0-3.46.37-4.92 1.04L5.22 5.92a.38.38 0 0 0-.52-.14.38.38 0 0 0-.14.52L6.4 9.48C3.24 11.2 1.1 14.4.8 18.14h22.4c-.3-3.74-2.44-6.94-5.6-8.66zM7 15.26a.96.96 0 1 1 0-1.92.96.96 0 0 1 0 1.92zm10 0a.96.96 0 1 1 0-1.92.96.96 0 0 1 0 1.92z"/></svg></div>
+        <div><h3>Android</h3><div class="meta">Android 7.0+, phones and tablets</div></div>
       </div>
-      <a class="btn" data-asset="Camel1-TV-Android.apk" href="#">Download .apk</a>
+      <p>Direct APK install. Not on Google Play.</p>
+      <div class="actions"><a class="btn" data-asset="Camel1-TV-Android.apk" href="#">Download .apk <span class="size"></span></a></div>
+      <details><summary>Phone blocks the install</summary>
+        <ol><li>Open the downloaded file.</li><li>Android asks to allow installs from your browser. Allow it.</li><li>Open the file again and tap Install.</li></ol></details>
     </div>
 
     <div class="card" data-os="windows">
-      <div class="info">
-        <h2>Windows <span class="tag" hidden>Your device</span></h2>
-        <p>Windows 10 and 11, 64-bit installer.</p>
-        <details><summary>Windows SmartScreen warning</summary>
-          Click "More info", then "Run anyway". The app isn't code-signed, which is why Windows asks.
-        </details>
+      <span class="you">Your device</span>
+      <div class="head">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 5.6l7.4-1v7H3zM11.6 4.4L21 3v8.6h-9.4zM3 12.4h7.4v7L3 18.4zM11.6 12.4H21V21l-9.4-1.3z"/></svg></div>
+        <div><h3>Windows</h3><div class="meta">Windows 10 and 11, 64-bit</div></div>
       </div>
-      <a class="btn" data-asset="Camel1-TV-Windows-Setup.exe" href="#">Download installer</a>
+      <p>Standard installer. Uses the WebView2 runtime built into Windows.</p>
+      <div class="actions"><a class="btn" data-asset="Camel1-TV-Windows-Setup.exe" href="#">Download installer <span class="size"></span></a></div>
+      <details><summary>Windows protected your PC</summary>
+        <ol><li>Click More info.</li><li>Click Run anyway.</li></ol>
+        SmartScreen shows this for any new app without a paid code-signing certificate.</details>
     </div>
 
     <div class="card" data-os="linux">
-      <div class="info">
-        <h2>Linux <span class="tag" hidden>Your device</span></h2>
-        <p>AppImage runs anywhere (<code>chmod +x</code> it first). A .deb is also available.</p>
+      <span class="you">Your device</span>
+      <div class="head">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2c-2.3 0-3.7 1.9-3.7 4.4 0 1-.3 1.6-.9 2.5-.9 1.3-2.4 2.9-2.4 5.3 0 .5.1 1 .2 1.4-.6.5-1.2 1.1-1.2 1.9 0 1.3 1.6 1.7 3 1.9.6.9 1.6 1.4 2.9 1.4h4.2c1.3 0 2.3-.5 2.9-1.4 1.4-.2 3-.6 3-1.9 0-.8-.6-1.4-1.2-1.9.1-.4.2-.9.2-1.4 0-2.4-1.5-4-2.4-5.3-.6-.9-.9-1.5-.9-2.5C15.7 3.9 14.3 2 12 2zm-1.3 4.2c.5 0 .8.6.8 1.2s-.3 1.1-.8 1.1-.8-.5-.8-1.1.3-1.2.8-1.2zm2.6 0c.5 0 .8.6.8 1.2s-.3 1.1-.8 1.1-.8-.5-.8-1.1.3-1.2.8-1.2zM12 8.9c.9 0 2 .5 2 .9 0 .5-1.1 1.2-2 1.2s-2-.7-2-1.2c0-.4 1.1-.9 2-.9zm0 3.3c1.9 0 3.2 2.2 3.2 4.3 0 1.4-1.1 2.3-3.2 2.3s-3.2-.9-3.2-2.3c0-2.1 1.3-4.3 3.2-4.3z"/></svg></div>
+        <div><h3>Linux</h3><div class="meta">x86_64. AppImage or Debian package</div></div>
       </div>
-      <a class="btn" data-asset="Camel1-TV-Linux.AppImage" href="#">AppImage</a>
-      <a class="btn" data-asset="Camel1-TV-Linux.deb" href="#">.deb</a>
+      <p>AppImage runs on any distribution. The .deb is for Ubuntu, Debian and Mint.</p>
+      <div class="actions">
+        <a class="btn" data-asset="Camel1-TV-Linux.AppImage" href="#">AppImage <span class="size"></span></a>
+        <a class="btn secondary" data-asset="Camel1-TV-Linux.deb" href="#">.deb <span class="size"></span></a>
+      </div>
+      <details><summary>Running the AppImage</summary>
+        <ol><li><code>chmod +x Camel1-TV-Linux.AppImage</code></li><li>Double-click it, or run it from a terminal.</li></ol></details>
     </div>
 
     <div class="card" data-os="ios">
-      <div class="info">
-        <h2>iPhone and iPad <span class="tag" hidden>Your device</span></h2>
-        <p>Apple doesn't allow apps to be installed from a web page. Use the website instead:
-           open camel1.tv in Safari, tap Share, then "Add to Home Screen".</p>
+      <span class="you">Your device</span>
+      <div class="head">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 1.5h8A2.5 2.5 0 0 1 18.5 4v16A2.5 2.5 0 0 1 16 22.5H8A2.5 2.5 0 0 1 5.5 20V4A2.5 2.5 0 0 1 8 1.5zm0 1.6a.9.9 0 0 0-.9.9v16c0 .5.4.9.9.9h8c.5 0 .9-.4.9-.9V4a.9.9 0 0 0-.9-.9h-1.2a.8.8 0 0 1-.8.8h-4a.8.8 0 0 1-.8-.8H8zm4 15.2a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></div>
+        <div><h3>iPhone and iPad</h3><div class="meta">Web app</div></div>
       </div>
-      <a class="btn" href="https://www.camel1.tv/">Open camel1.tv</a>
+      <p>Apple doesn't allow apps to be installed from a web page. Add the website to your Home Screen instead; it opens full-screen like an app.</p>
+      <div class="actions"><a class="btn secondary" href="https://www.camel1.tv/">Open camel1.tv</a></div>
+      <details><summary>Add to Home Screen</summary>
+        <ol><li>Open camel1.tv in Safari.</li><li>Tap the Share button.</li><li>Tap Add to Home Screen.</li></ol></details>
     </div>
+
+  </div>
+
+  <h2 class="section">What you get</h2>
+  <div class="features">
+    <div class="feature"><strong>Its own window</strong><span>Camel1 TV as a proper app in your Dock, taskbar or app drawer.</span></div>
+    <div class="feature"><strong>Banners hidden</strong><span>The rotating promo banners on the home page are removed.</span></div>
+    <div class="feature"><strong>Pop-ups blocked</strong><span>Pop-up windows and known ad redirects never open.</span></div>
+    <div class="feature"><strong>Small and fast</strong><span>Uses the web engine already on your device. A few megabytes, not hundreds.</span></div>
   </div>
 
   <footer>
-    <span id="version"></span>
-    All downloads come from the project's
-    <a href="https://github.com/Holuwashina/camel1-tv-app/releases">GitHub Releases</a> page.
+    <span>Open source. <a href="https://github.com/Holuwashina/camel1-tv-app">Code on GitHub</a> · <a href="https://github.com/Holuwashina/camel1-tv-app/releases">All releases</a></span>
+    <span>Not affiliated with Camel1 or camel1.tv.</span>
   </footer>
-</main>
+</div>
 
 <script>
 (() => {
   const repo = 'Holuwashina/camel1-tv-app';
   const base = `https://github.com/${repo}/releases/latest/download/`;
+  const buttons = [...document.querySelectorAll('[data-asset]')];
+  buttons.forEach(a => { a.href = base + a.dataset.asset; });
 
-  // Point every button at the stable asset name on the latest release.
-  document.querySelectorAll('[data-asset]').forEach(a => { a.href = base + a.dataset.asset; });
-
-  // Highlight the visitor's platform and move it to the top.
+  // Detect the visitor's platform; its card moves first and the header button points at it.
   const ua = navigator.userAgent;
-  const os = /iPhone|iPad|iPod/.test(ua) ? 'ios'
+  const isIPadOS = /Mac/.test(ua) && navigator.maxTouchPoints > 1;
+  const os = /iPhone|iPad|iPod/.test(ua) || isIPadOS ? 'ios'
     : /Android/.test(ua) ? 'android'
     : /Mac/.test(ua) ? 'mac'
     : /Win/.test(ua) ? 'windows'
-    : /Linux/.test(ua) ? 'linux' : null;
-  if (os) {
-    const card = document.querySelector(`.card[data-os="${os}"]`);
-    if (card) {
-      card.classList.add('primary');
-      card.querySelector('.tag').hidden = false;
-      card.parentNode.prepend(card);
-    }
+    : /Linux|X11/.test(ua) ? 'linux' : null;
+  const labels = { mac: 'Download for Mac', android: 'Download for Android', windows: 'Download for Windows', linux: 'Download for Linux', ios: 'Open on iPhone' };
+  const card = os && document.querySelector(`.card[data-os="${os}"]`);
+  if (card) {
+    card.classList.add('primary');
+    const first = card.querySelector('.actions a');
+    const cta = document.getElementById('cta');
+    cta.href = first.href;
+    document.getElementById('cta-text').textContent = labels[os];
   }
 
-  // Grey out any download that isn't on the latest release yet.
+  // Fill in version and file sizes, and grey out anything not on the latest release yet.
+  const mb = n => `${(n / 1048576).toFixed(n > 50e6 ? 0 : 1)} MB`;
   fetch(`https://api.github.com/repos/${repo}/releases/latest`)
     .then(r => r.ok ? r.json() : null)
     .then(rel => {
       if (!rel) return;
-      const have = new Set(rel.assets.map(a => a.name));
-      document.querySelectorAll('[data-asset]').forEach(a => {
-        if (!have.has(a.dataset.asset)) {
-          a.classList.add('disabled');
-          a.textContent = 'Coming soon';
-        }
+      const assets = new Map(rel.assets.map(a => [a.name, a]));
+      buttons.forEach(a => {
+        const asset = assets.get(a.dataset.asset);
+        if (asset) { a.querySelector('.size').textContent = mb(asset.size); }
+        else { a.classList.add('disabled'); a.textContent = 'Coming soon'; }
       });
-      document.getElementById('version').textContent = `Latest: ${rel.tag_name}. `;
+      const v = rel.tag_name.replace(/^v/, '');
+      const d = new Date(rel.published_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      document.getElementById('version').innerHTML = `Version ${v} · ${d} · Free and open source`;
+      if (card && card.querySelector('.actions a').classList.contains('disabled')) {
+        document.getElementById('cta').href = '#downloads';
+      }
     })
     .catch(() => {});
 })();
