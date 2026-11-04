@@ -128,11 +128,15 @@
     const v = document.querySelector('#room_video_match video');
     if (!v || v.dataset.ninetyGuard) return;
     v.dataset.ninetyGuard = '1';
-    let stalledAt = 0, ours = false;
-    v.addEventListener('waiting', () => { stalledAt = Date.now(); });
+    // Stalled from the stall until playback has moved 3 s past the stall point.
+    let stalled = false, stallPos = 0, ours = false;
+    const onStall = () => { if (!stalled) { stalled = true; stallPos = v.currentTime; } };
+    v.addEventListener('waiting', onStall);
+    v.addEventListener('stalled', onStall);
+    v.addEventListener('timeupdate', () => { if (stalled && v.currentTime > stallPos + 3) stalled = false; });
     v.addEventListener('seeking', () => {
       if (ours) { ours = false; return; }
-      if (Date.now() - stalledAt > 15000) return;
+      if (!stalled) return;
       const b = v.buffered;
       if (!b.length) return;
       const end = b.end(b.length - 1);
