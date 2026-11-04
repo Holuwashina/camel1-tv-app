@@ -9,6 +9,7 @@
 [![Latest release](https://img.shields.io/github/v/release/Holuwashina/camel1-tv-app?label=version&color=5fd36b)](https://github.com/Holuwashina/camel1-tv-app/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Holuwashina/camel1-tv-app/total?color=5fd36b)](https://github.com/Holuwashina/camel1-tv-app/releases)
 [![Build](https://img.shields.io/github/actions/workflow/status/Holuwashina/camel1-tv-app/release.yml?label=build)](https://github.com/Holuwashina/camel1-tv-app/actions)
+[![License: MIT](https://img.shields.io/badge/license-MIT-5fd36b)](LICENSE)
 
 ### [⬇ &nbsp;Download for your device](https://holuwashina.github.io/camel1-tv-app/)
 
@@ -38,6 +39,10 @@ All files come from the [Releases](https://github.com/Holuwashina/camel1-tv-app/
 ## Building from source
 
 See [BUILDING.md](BUILDING.md).
+
+## License
+
+[MIT](LICENSE). The app code is open source; camel1.tv and its content belong to their respective owners.
 
 ---
 
