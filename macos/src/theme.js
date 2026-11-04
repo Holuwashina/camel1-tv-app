@@ -23,7 +23,7 @@ a:hover{color:var(--accent-text)!important}
 .homeMatch div:has(> .news),.news,.newsC,.homeMatchTeam,.homeMatch section[class*="xl:hidden"],.homeMatch section:has(> ul[class*="overflow-x-auto"]),
 #room-about,#room-odds,.right-column-tab-item:nth-child(3),.room>div.fixed,[class*="roomGuide"],
 .roomLive-wrapper>:not(.roomLive),[class*="roomLiveChat"],.roomLiveVideo-streams-login,.roomTab-channel-tips,
-[class*="z-[700]"],.roomBannerWrapper,.roomBanner,.homeTopBanner,.ads-video,[data-positiontype]{display:none!important}
+[class*="z-[700]"],.roomBannerWrapper,.roomBanner,.danmaku,.homeTopBanner,.ads-video,[data-positiontype]{display:none!important}
 .roomBox>div.hidden.text-center,.roomBox>div[class*="text-center"][class*="font-[700]"]{display:none!important}
 
 /* layout: schedule full width, player full width */
@@ -64,6 +64,10 @@ a:hover{color:var(--accent-text)!important}
 
 /* theme switcher (mounted by adblock.js) */
 .grouped-match-item a.team-name,.grouped-match-item a.team-logo{pointer-events:none}
+.roomTab-items-chat,.roomTab-items-odds,.roomTab-items-about,.roomTab-items-prediction{display:none!important}
+.room-breadcrumb-parent,.room-breadcrumb{display:none!important}
+.roomTeamStatistics{background:var(--surface)!important;color:var(--text)!important}.roomTeamStatistics-top-team,.roomTeamStatistics-top-score,.roomTeamStatistics-top-score *{color:var(--text)!important}.roomTeamStatistics-top-league,.roomTeamStatistics-top-league *{color:var(--muted)!important}.roomTeamStatistics-top-status{color:var(--accent-text)!important}
+.roomPatchBanner{visibility:hidden!important}.roomMatch>div>nav{display:none!important}
 .ninety-back{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 10px;margin-left:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)!important;font:500 13px/1 Inter,system-ui,sans-serif;text-decoration:none!important;white-space:nowrap}.ninety-back::before{content:"←";font-size:14px;color:var(--muted)}.ninety-back:hover{border-color:var(--accent)}
 .ninety-theme{display:inline-flex;gap:6px;align-items:center;margin-left:auto;padding:4px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
 .ninety-theme button{width:28px;height:28px;border:0;border-radius:6px;background:transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}

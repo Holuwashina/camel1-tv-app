@@ -113,6 +113,10 @@
     try { document.cookie = 'showRoomGuide=1; path=/; max-age=31536000; SameSite=Lax'; } catch (e) {}
     const close = document.querySelector('.MuiModal-root .roomGuide-close');
     if (close) close.click();
+    // Phone match page opens on a tab we do not show; move to the match tab.
+    const chat = document.querySelector('.roomTab-items-chat.roomTab-items-active');
+    const match = chat && document.querySelector('.roomTab-items-match');
+    if (match) match.click();
   };
   quietGuide();
 
@@ -120,6 +124,9 @@
   const closeHouseAds = () => {
     for (const b of document.querySelectorAll('button[aria-label="Close ad"]')) {
       if (b.textContent.trim() === '\u00d7') b.click();
+    }
+    for (const d of document.querySelectorAll('.roomPatchBanner div')) {
+      if (d.childElementCount === 0 && d.textContent.trim().toUpperCase() === 'CLOSE') d.click();
     }
   };
 
